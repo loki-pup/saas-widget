@@ -1,4 +1,4 @@
-import path from "path"
+import path, { format } from "path"
 import tailwindcss from "@tailwindcss/vite"
 import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
@@ -11,4 +11,12 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    lib: {
+      entry: "./src/index.jsx",
+      name: "widget",
+      fileName: (format) => `widget.${format}.js`
+    },
+    target:"esnext",
+  }
 })
