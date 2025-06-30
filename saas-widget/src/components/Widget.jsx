@@ -9,7 +9,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import supabase from "../supabaseClient";
-
+import tailwindStyles from "../index.css?inline";
 
 export const Widget = ({ projectId}) => {
     const [rating, SetRating] = useState(3);
@@ -27,7 +27,7 @@ export const Widget = ({ projectId}) => {
             p_user_name: form.name.value,
             p_user_email: form.email.value,
             p_message: form.feedback.value,
-            rating,
+            p_rating: rating,
         };
         const { data: returnedData, error} = await supabase.rpc("add_feedback", data);
         SetSubmitted(true);
@@ -35,6 +35,8 @@ export const Widget = ({ projectId}) => {
 
 
     return (
+        <>
+     <style>{tailwindStyles}</style>   
     <div className="widget fixed bottom-8 right-8 z-50">
         <Popover>
             <PopoverTrigger asChild>
@@ -44,23 +46,23 @@ export const Widget = ({ projectId}) => {
     </PopoverTrigger>
     <PopoverContent className="widget mr-10 rounded-lg shadow-lg w-full bg-card max-w-md p-4">
         { submitted ? (<div>
-        <h3 className="text-lg font-bold">Thank you for your doggie feedback</h3>
+        <h3 className="text-center text-lg font-bold">Thank you for your doggie feedback</h3>
         <p className="mt-4">We appreciate your doggie feedback. It helps us improve doggie products</p>
     </div>) :
     <div>
-        <h3 className="text-lg font-bold">Send us doggie feedback</h3>
-        <form className="space-y-2" onSubmit={submit}>
+        <h3 className="text-center text-lg font-bold mb-3">Send us doggie feedback</h3>
+        <form className="space-y-3" onSubmit={submit}>
             <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
+            <div className="space-y-3">
                 <Label className="block text-center w-full" htmlFor="name">Name</Label>
                 <Input id="name" placeholder="Enter doggie's name"/>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-3">
                 <Label className="block text-center w-full" htmlFor="email">Email</Label>
                 <Input id="email" type="email" placeholder="Enter doggie's email"/>
             </div>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-3">
                 <Label className="block text-center w-full" htmlFor="feedback">Feedback</Label>
                 <Textarea 
                 className="min-h-[100px]"
@@ -84,6 +86,7 @@ export const Widget = ({ projectId}) => {
     </PopoverContent>
     </Popover>
     </div>
+    </>
     );
 };
 
