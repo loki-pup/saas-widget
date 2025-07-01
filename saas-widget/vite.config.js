@@ -1,11 +1,15 @@
 import path, { format } from "path"
-import tailwindcss from "@tailwindcss/vite"
 import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  define: {
+    "process.env": {
+      NODE_ENV: "production",
+    },
+  },
+  plugins: [react()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -18,5 +22,6 @@ export default defineConfig({
       fileName: (format) => `widget.${format}.js`
     },
     target:"esnext",
+    cssCodeSplit: false,
   }
 })
