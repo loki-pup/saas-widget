@@ -11,16 +11,13 @@ import {
 import supabase from "../supabaseClient";
 import tailwindStyles from "../index.css?inline";
 
-export const Widget = ({ projectId, shadowRoot}) => {
+export const Widget = ({ projectId}) => {
     const [rating, SetRating] = useState(3);
     const [submitted, SetSubmitted] = useState(false);
 
     const onSelectStar = (index) => {
         SetRating(index+1);
     };
-
-    console.log(import.meta.env.VITE_SUPABASE_URL);
-console.log(import.meta.env.VITE_SUPABASE_ANON_KEY);
 
 
     const submit = async (e) => {
