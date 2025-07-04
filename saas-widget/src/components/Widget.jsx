@@ -19,6 +19,10 @@ export const Widget = ({ projectId, shadowRoot}) => {
         SetRating(index+1);
     };
 
+    console.log(import.meta.env.VITE_SUPABASE_URL);
+console.log(import.meta.env.VITE_SUPABASE_ANON_KEY);
+
+
     const submit = async (e) => {
         e.preventDefault();
         const form = e.target;
