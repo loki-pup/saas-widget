@@ -2,7 +2,7 @@ import { Button } from "./ui/button";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   Popover,
   PopoverContent,
@@ -15,9 +15,25 @@ export const Widget = ({ projectId}) => {
     const [rating, SetRating] = useState(3);
     const [submitted, SetSubmitted] = useState(false);
 
+    const [imageBase64, SetImageBase64] = useState(null);
+    const [imageName, SetImageName] = useState(null);
+    const fileInputRef = useRef(null); 
+
     const onSelectStar = (index) => {
         SetRating(index+1);
     };
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file && file.type.startsWith("image/")) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                SetImageBase64(reader.result);
+                SetImageName(file.name);
+            };
+            reader.readAsDataURL(file);
+        }
+    }
 
 
     const submit = async (e) => {
@@ -29,9 +45,11 @@ export const Widget = ({ projectId}) => {
             p_user_email: form.email.value,
             p_message: form.feedback.value,
             p_rating: rating,
+            p_photo_base64: imageBase64,
+            p_photo_name: imageName,
         };
-        const { data: returnedData, error} = await supabase.rpc("add_feedback", data);
         SetSubmitted(true);
+        const { data: returnedData, error} = await supabase.rpc("add_feedback", data);       
     }
 
 
@@ -78,6 +96,17 @@ export const Widget = ({ projectId}) => {
                 className="min-h-[100px]"
                 id="feedback" placeholder="Tell us about the doggie"/>
             </div>
+
+            <div className="space-y-3">
+                <Label className="block text-center w-full">
+                    Upload doggie photo</Label>
+                <Input id="photo" name="photo" type="file" accept="image/*" 
+                onChange={handleFileChange} ref={fileInputRef} />   
+                {imageBase64 && (<img src={imageBase64} alt="doggie photo"
+                className="mx-auto h-32 object-contain"/>)}
+            </div>
+
+
             <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
                 {[...Array(5)].map((_, index) => (
