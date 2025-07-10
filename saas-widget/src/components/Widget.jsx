@@ -65,9 +65,9 @@ export const Widget = ({ projectId}) => {
         Feedback</Button>
     </PopoverTrigger>
     <PopoverContent 
-    className="widget tw-preflight p-0 w-auto ">
+    className="widget tw-preflight">
          <style>{tailwindStyles}</style>   
-         <div className="sm:mr-10 sm:shadow-lg mr-4 rounded-lg border border-gray-300   w-full bg-card sm:p-4 p-3 sm:max-w-md max-w-[90vw]">
+         <div className=" sm:mr-10 mr-1 sm:shadow-lg rounded-lg border border-gray-300   w-full bg-card sm:p-4 p-3 sm:max-w-md max-w-[90vw]">
         { submitted ? (<div>
         <h3 className="text-center text-lg font-bold">Thank you for your doggie feedback</h3>
         <p className="text-left items-center mt-2">We appreciate your doggie feedback. It helps us improve doggie products</p>
