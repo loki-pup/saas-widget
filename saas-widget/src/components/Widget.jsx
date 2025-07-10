@@ -65,9 +65,9 @@ export const Widget = ({ projectId}) => {
         Feedback</Button>
     </PopoverTrigger>
     <PopoverContent 
-    className="widget tw-preflight">
+    className="widget tw-preflight p-0 w-auto ">
          <style>{tailwindStyles}</style>   
-         <div className="sm:mr-10 mr-5 rounded-lg shadow-lg w-full bg-card sm:max-w-md sm:p-4 max-w-[88vw] p-2">
+         <div className="sm:mr-10 mr-4 rounded-lg shadow-sm sm:shadow-lg w-full bg-card sm:p-4 p-2 sm:max-w-md max-w-[88vw]">
         { submitted ? (<div>
         <h3 className="text-center text-lg font-bold">Thank you for your doggie feedback</h3>
         <p className="text-left items-center mt-2">We appreciate your doggie feedback. It helps us improve doggie products</p>
@@ -80,13 +80,13 @@ export const Widget = ({ projectId}) => {
                 <Label 
                 className="block text-center w-full" htmlFor="name">Name</Label>
                 <Input 
-                id="name" placeholder="Enter doggie's name"/>
+                id="name" placeholder="doggie's name"/>
             </div>
             <div className="space-y-3">
                 <Label 
                 className="block text-center w-full" htmlFor="email">Email</Label>
                 <Input 
-                id="email" type="email" placeholder="Enter doggie's email"/>
+                id="email" type="email" placeholder="doggie's email"/>
             </div>
             </div>
             <div className="space-y-3">
